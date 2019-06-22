@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Post } from "../post.model";
 import { PostsService } from "../posts.service";
+import { mimeType } from "./mime-type.validate";
 
 @Component({
   selector: "app-post-create",
@@ -32,7 +33,10 @@ export class PostCreateComponent implements OnInit {
       }),
       // tslint:disable-next-line: object-literal-key-quotes
       content: new FormControl(null, { validators: [Validators.required] }),
-      image: new FormControl(null, { validators: [Validators.required] })
+      image: new FormControl(null, {
+        validators: [Validators.required],
+        asyncValidators: [mimeType]
+      })
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has("postId")) {
