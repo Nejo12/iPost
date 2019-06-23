@@ -89,9 +89,9 @@ export class PostsService {
       postData.append("image", image, title);
     } else {
       const postData: Post = {
-        id: id,
-        title: title,
-        content: content,
+        id,
+        title,
+        content,
         imagePath: image
       };
     }
@@ -102,9 +102,9 @@ export class PostsService {
         const updatedPosts = [...this.posts];
         const oldPostIndex = updatedPosts.findIndex(p => p.id === id);
         const post: Post = {
-          id: id,
-          title: title,
-          content: content,
+          id,
+          title,
+          content,
           imagePath: "response.imagePath"
         };
         updatedPosts[oldPostIndex] = post;
