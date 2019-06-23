@@ -20,7 +20,12 @@ export class PostsService {
       .pipe(
         map(postsData => {
           return postsData.posts.map(post => {
-            return { title: post.title, content: post.content, id: post._id };
+            return {
+              title: post.title,
+              content: post.content,
+              id: post._id,
+              imagePath: post.imagePath
+            };
           });
         })
       )
@@ -40,17 +45,29 @@ export class PostsService {
     );
   }
 
-  addPost(title: string, content: string) {
-    const post: Post = { id: null, title, content };
+  addPost(title: string, content: string, image: File) {
+    // const post: Post = { id: null, title, content };
+    const postData = new FormData();
+    postData.append("title", title);
+    postData.append("content", content);
+    postData.append("image", image, title);
     this.http
-      .post<{ message: string; postId: string }>(
+      .post<{ message: string; post: Post }>(
         "http://localhost:3000/api/posts",
-        post
+        postData
       )
       .subscribe(responseData => {
+        const post: Post = {
+          id: responseData.post.id,
+          // tslint:disable-next-line: object-literal-shorthand
+          title: title,
+          // tslint:disable-next-line: object-literal-shorthand
+          content: content,
+          imagePath: responseData.post.imagePath
+        };
         // console.log(responseData.message);
-        const id = responseData.postId;
-        post.id = id;
+        // const id = responseData.postId;
+        // post.id = id;
         this.posts.push(post);
         this.postsUpdated.next([...this.posts]);
         this.router.navigate(["/"]);
@@ -58,7 +75,7 @@ export class PostsService {
   }
 
   updatePost(id: string, title: string, content: string) {
-    const post: Post = { id, title, content };
+    const post: Post = { id, title, content, imagePath: null };
     this.http
       .put("http://localhost:3000/api/posts/" + id, post)
       .subscribe(response => {
