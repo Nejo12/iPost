@@ -6,7 +6,13 @@ import { AuthData } from "./auth-data.model";
   providedIn: "root"
 })
 export class AuthService {
+  private token: string;
+
   constructor(private http: HttpClient) {}
+
+  getToken() {
+    return this.token;
+  }
 
   createUser(email: string, password: string) {
     // tslint:disable-next-line: object-literal-shorthand
@@ -21,9 +27,10 @@ export class AuthService {
   loginUser(email: string, password: string) {
     const authData: AuthData = { email, password };
     this.http
-      .post("http://localhost:3000/api/user/login", authData)
+      .post<{ token: string }>("http://localhost:3000/api/user/login", authData)
       .subscribe(response => {
-        // console.log("response in authServiceLogin: ", response);
+        const token = response.token;
+        this.token = token;
       });
   }
 }
