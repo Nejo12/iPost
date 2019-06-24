@@ -12,6 +12,7 @@
         required
         email
         placeholder="E-mail"
+        autocomplete="email"
       />
       <mat-error *ngIf="emailInput.invalid"
         >Please enter a valid email</mat-error
@@ -28,6 +29,7 @@
         required
         password
         placeholder="Password"
+        autocomplete="password"
       />
       <mat-error *ngIf="passwordInput.invalid"
         >Please enter valid Password</mat-error
