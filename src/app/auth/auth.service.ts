@@ -19,12 +19,11 @@ export class AuthService {
   }
 
   loginUser(email: string, password: string) {
-    // tslint:disable-next-line: object-literal-shorthand
-    const authData: AuthData = { email: email, password: password };
+    const authData: AuthData = { email, password };
     this.http
       .post("http://localhost:3000/api/user/login", authData)
       .subscribe(response => {
-        console.log("response in authServiceLogin: ", response);
+        // console.log("response in authServiceLogin: ", response);
       });
   }
 }
