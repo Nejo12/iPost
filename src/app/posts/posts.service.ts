@@ -36,7 +36,7 @@ export class PostsService {
         })
       )
       .subscribe(transformedPostData => {
-        console.log(transformedPostData.posts);
+        // console.log(transformedPostData.posts);
         this.posts = transformedPostData.posts;
         this.postsUpdated.next({
           posts: [...this.posts],

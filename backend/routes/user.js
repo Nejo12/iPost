@@ -15,7 +15,7 @@ router.post("/signup", (req, res, next) => {
     user
       .save()
       .then(result => {
-        console.log(result);
+        // console.log(result);
         res.status(201).json({
           message: "User created.",
           result: result
@@ -23,8 +23,7 @@ router.post("/signup", (req, res, next) => {
       })
       .catch(err => {
         res.status(500).json({
-          message: "Error in Saving User",
-          error: err
+          message: "Invalid Authentication Credentials!"
         });
       });
   });
@@ -36,7 +35,7 @@ router.post("/signup", (req, res, next) => {
         // console.log(user);
         if (!user) {
           return res.status(401).json({
-            message: "User does not exist."
+            message: "User does not exist!"
           });
         }
         fetchedUser = user;
@@ -46,7 +45,7 @@ router.post("/signup", (req, res, next) => {
         // console.log(result);
         if (!result) {
           return res.status(401).json({
-            message: "Auth Failed!"
+            message: "The Password does not match with the email!"
           });
         }
         const token = jwt.sign(
