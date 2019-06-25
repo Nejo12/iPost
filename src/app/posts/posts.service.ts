@@ -55,6 +55,7 @@ export class PostsService {
       title: string;
       content: string;
       imagePath: string;
+      creator: string;
     }>("http://localhost:3000/api/posts/" + id);
   }
 
@@ -89,7 +90,8 @@ export class PostsService {
         title: title,
         // tslint:disable-next-line: object-literal-shorthand
         content: content,
-        imagePath: image
+        imagePath: image,
+        creator: null
       };
     }
     this.http
