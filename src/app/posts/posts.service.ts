@@ -81,8 +81,11 @@ export class PostsService {
       postData.append("image", image, title);
     } else {
       postData = {
+        // tslint:disable-next-line: object-literal-shorthand
         id: id,
+        // tslint:disable-next-line: object-literal-shorthand
         title: title,
+        // tslint:disable-next-line: object-literal-shorthand
         content: content,
         imagePath: image
       };
