@@ -33,7 +33,7 @@ router.post("/signup", (req, res, next) => {
     let fetchedUser;
     User.findOne({ email: req.body.email })
       .then(user => {
-        console.log(user);
+        // console.log(user);
         if (!user) {
           return res.status(401).json({
             message: "User does not exist."
@@ -43,7 +43,7 @@ router.post("/signup", (req, res, next) => {
         return bcrypt.compare(req.body.password, user.password);
       })
       .then(result => {
-        console.log(result);
+        // console.log(result);
         if (!result) {
           return res.status(401).json({
             message: "Auth Failed!"
