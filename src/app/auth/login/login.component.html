@@ -35,7 +35,7 @@
         >Please enter valid Password</mat-error
       >
     </mat-form-field>
-    <button mat-raised-button color="accent">
+    <button mat-raised-button color="accent" *ngIf="!isLoading">
       Login
     </button>
   </form>
